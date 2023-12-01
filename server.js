@@ -8,13 +8,13 @@ const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
-// mongoose.connect('mongodb://127.0.0.1:27017/bookLibrary', { useNewUrlParser: true, useUnifiedTopology: true });
-// mongoose.connection.on('connected', () => {
-//   console.log('Connected to MongoDB');
-// });
-// mongoose.connection.on('error', (err) => {
-//   console.error('MongoDB connection error:', err);
-// });
+mongoose.connect('mongodb://127.0.0.1:27017/bookLibrary', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB');
+});
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
 
 
 const bookSchema = new mongoose.Schema({
@@ -33,6 +33,8 @@ app.get('/api/books', async (req, res) => {
   const books = await Book.find();
   res.json(books);
 });
+
+
 
 app.get('/api/books/:id', async (req, res) => {
   const book = await Book.findById(req.params.id);
@@ -57,13 +59,8 @@ app.delete('/api/books/:id', async (req, res) => {
 });
 
 
-app.listen(port, async ()=>{
-  try {
-     await connection;
-     console.log('Connected to server success!'); 
-  } catch (error) {
-      console.log(error);
-  }
-
-  console.log(`listening to server  ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
