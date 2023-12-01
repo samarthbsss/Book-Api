@@ -24,11 +24,16 @@ const bookSchema = new mongoose.Schema({
 
 const Book = mongoose.model('Book', bookSchema);
 
+app.get('/', async(req, res)=>{
+  res.send("Welcome to book Api");
+})
 
 app.get('/api/books', async (req, res) => {
   const books = await Book.find();
   res.json(books);
 });
+
+
 
 app.get('/api/books/:id', async (req, res) => {
   const book = await Book.findById(req.params.id);
@@ -49,6 +54,7 @@ app.put('/api/books/:id', async (req, res) => {
 app.delete('/api/books/:id', async (req, res) => {
   await Book.findByIdAndDelete(req.params.id);
   res.json({ message: 'Book deleted successfully' });
+
 });
 
 
