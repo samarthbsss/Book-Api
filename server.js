@@ -34,8 +34,6 @@ app.get('/api/books', async (req, res) => {
   res.json(books);
 });
 
-
-
 app.get('/api/books/:id', async (req, res) => {
   const book = await Book.findById(req.params.id);
   res.json(book);
@@ -58,10 +56,6 @@ app.delete('/api/books/:id', async (req, res) => {
 
 });
 
-
-// app.listen(PORT, () => {
-//   console.log(`Server is running on http://localhost:${PORT}`);
-// });
 
 app.listen(port, async ()=>{
   try {
